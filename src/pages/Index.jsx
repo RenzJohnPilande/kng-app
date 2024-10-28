@@ -1,6 +1,8 @@
 import { AlertBar } from "../components/AlertBar";
 import { HeroSection } from "../sections/HeroSection";
 import { Navigation } from "../components/Navigation";
+import { ProductSection } from "@/sections/ProductSection";
+import { CollectionSection } from "@/sections/CollectionSection";
 
 export const Index = () => {
   return (
@@ -8,6 +10,8 @@ export const Index = () => {
       <AlertBar />
       <Navigation />
       <HeroSection />
+      <ProductSection />
+      <CollectionSection />
     </>
   );
 };
