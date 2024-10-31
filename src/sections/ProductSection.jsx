@@ -51,7 +51,7 @@ export const ProductSection = () => {
           onClick={() => handleButtonClick("Bags")}
         />
       </div>
-      <div className="flex flex-wrap justify-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <div className="flex flex-wrap justify-center grid grid-cols-2 lg:grid-cols-4 gap-4 p-4">
         {products.map((product) => (
           <ProductCard
             key={product.id}
