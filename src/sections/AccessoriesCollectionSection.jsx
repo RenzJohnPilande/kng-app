@@ -10,10 +10,18 @@ export const AccessoriesCollectionSection = () => {
       </div>
       <div className="flex flex-wrap justify-center container p-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[1200px]">
-          <div className="p-5 border w-full h-[300px] bg-black rounded m-2"></div>
-          <div className="p-5 border w-full h-[300px] bg-black rounded m-2"></div>
-          <div className="p-5 border w-full h-[300px] bg-black rounded m-2"></div>
-          <div className="p-5 border w-full h-[300px] bg-black rounded m-2"></div>
+          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
+            <span className="text-2xl uppercase font-semibold">Caps</span>
+          </div>
+          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
+            <span className="text-2xl uppercase font-semibold">Gloves</span>
+          </div>
+          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
+            <span className="text-2xl uppercase font-semibold">Belts</span>
+          </div>
+          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
+            <span className="text-2xl uppercase font-semibold">Arm Sleeves</span>
+          </div>
         </div>
       </div>
     </div>

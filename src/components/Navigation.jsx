@@ -21,7 +21,9 @@ export const Navigation = () => {
         />
       </div>
       <div className="hidden lg:flex flex-wrap justify-center content-center text-black font-semibold uppercase w-1/2">
-        <Link className="mx-2">All</Link>
+        <Link to={"/products"} className="mx-2">
+          All
+        </Link>
         <Link className="mx-2">Men</Link>
         <Link className="mx-2">Women</Link>
         <Link className="mx-2">Kids</Link>
