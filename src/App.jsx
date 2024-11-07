@@ -8,6 +8,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/category/:category" element={<Products />} />
+        <Route path="/products/search/:searchTerm" element={<Products />} />
       </Routes>
     </BrowserRouter>
   );

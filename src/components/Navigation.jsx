@@ -1,37 +1,63 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { RxHamburgerMenu, RxMagnifyingGlass } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const Navigation = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const url = searchQuery ? `/products/search/${searchQuery}` : "/products";
+    navigate(url);
+  };
+
   return (
     <div className="flex flex-wrap w-full justify-between lg:justify-center items-center  shadow py-1 px-5">
-      <div className="flex flex-wrap justify-center w-1/4">
+      <Link to={"/"} className="flex flex-wrap justify-center w-1/4">
         <img
           src="/images/landingpage/kng-logo.jpg"
           alt="K&G Logo"
           className="aspect-square w-[75px]"
         />
-      </div>
+      </Link>
       <div className="hidden lg:flex flex-wrap justify-center content-center text-black font-semibold uppercase w-1/2">
         <Link to={"/products"} className="mx-2">
           All
         </Link>
-        <Link className="mx-2">Men</Link>
-        <Link className="mx-2">Women</Link>
-        <Link className="mx-2">Kids</Link>
-        <Link className="mx-2">Accessories</Link>
-        <Link className="mx-2">Bag</Link>
+        <Link to={"/products/category/men"} className="mx-2">
+          Men
+        </Link>
+        <Link to={"/products/category/women"} className="mx-2">
+          Women
+        </Link>
+        <Link to={"/products/category/kids"} className="mx-2">
+          Kids
+        </Link>
+        <Link to={"/products/category/accessories"} className="mx-2">
+          Accessories
+        </Link>
+        <Link to={"/products/category/bags"} className="mx-2">
+          Bags
+        </Link>
       </div>
       <div className="hidden lg:flex flex-wrap justify-center w-1/4">
-        <Input type="text" placeholder="search" className=" rounded" />
+        <form
+          onSubmit={handleSearchSubmit}
+          className="flex items-center border px-2 py-1 gap-2 rounded"
+        >
+          <RxMagnifyingGlass />
+          <input
+            type="search"
+            placeholder="Search products"
+            className="rounded outline-none"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </form>
       </div>
       <div className="flex lg:hidden">
         <Sheet>

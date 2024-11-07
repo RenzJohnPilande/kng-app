@@ -17,11 +17,11 @@ export const ProductSection = () => {
       let fetchedProducts;
       if (result) {
         if (activeButton == "Apparel") {
-          fetchedProducts = result.filter((product) => product.category === "apparel");
+          fetchedProducts = result.filter((product) => product.subcategory === "apparel");
         } else if (activeButton == "Accessories") {
-          fetchedProducts = result.filter((product) => product.category === "accessories");
+          fetchedProducts = result.filter((product) => product.subcategory === "accessories");
         } else {
-          fetchedProducts = result.filter((product) => product.category === "bags");
+          fetchedProducts = result.filter((product) => product.subcategory === "bags");
         }
         const filteredProducts = fetchedProducts.slice(0, 8);
         setProducts(filteredProducts);
@@ -51,11 +51,14 @@ export const ProductSection = () => {
           onClick={() => handleButtonClick("Bags")}
         />
       </div>
-      <div className="flex flex-wrap justify-center grid grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+      <div className="flex flex-wrap justify-center grid grid-cols-2 lg:grid-cols-4 gap-6 p-4">
         {products.map((product) => (
           <ProductCard
             key={product.id}
             label={product.name}
+            category={product.category}
+            price={product.price}
+            colors={product.hexcode}
             image={`/images/products/${product.images[0]}`}
             link={`/products/${product.id}`}
           />
