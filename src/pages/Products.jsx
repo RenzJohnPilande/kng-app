@@ -16,7 +16,8 @@ import { FilterBox } from "@/components/FilterBox";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useParams } from "react-router";
 import { CTAButton } from "@/components/CTAButton";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { filters } from "@/constants/Filters";
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -24,8 +25,11 @@ export const Products = () => {
   const [error, setError] = useState(null);
   const [productTotal, setProductTotal] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
+  const [activeFilters, setActiveFilters] = useState(filters);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortContent, setSortContent] = useState("");
   const productsPerPage = 8;
+  const location = useLocation();
 
   const { category, searchTerm } = useParams();
 
@@ -33,49 +37,93 @@ export const Products = () => {
     const result = await FetchProducts();
     let filteredProducts = result;
 
-    // Filter products based on category if it exists
     if (category) {
       filteredProducts = filteredProducts.filter((product) => product.category === category);
     }
 
-    // Filter products based on search term if it exists
     if (searchTerm) {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()) // Search by product name
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Apply additional filters (e.g., selected filters for product type)
     if (selectedFilters.length > 0 && !selectedFilters.includes("all")) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.includes(product.type)
       );
     }
 
+    switch (sortContent) {
+      case "alphabet-asc":
+        filteredProducts = filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "alphabet-desc":
+        filteredProducts = filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "price-asc":
+        filteredProducts = filteredProducts.sort((a, b) => {
+          return parseFloat(a.price) - parseFloat(b.price);
+        });
+        break;
+      case "price-desc":
+        filteredProducts = filteredProducts.sort((a, b) => {
+          return parseFloat(b.price) - parseFloat(a.price);
+        });
+        break;
+      default:
+        break;
+    }
+
     setProductTotal(filteredProducts.length);
 
-    // Handle pagination
     const startIndex = (currentPage - 1) * productsPerPage;
     const paginatedProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
 
     setProducts(paginatedProducts);
   };
 
-  // Call getProducts whenever selectedFilters, currentPage, or category/searchTerm changes
   useEffect(() => {
     getProducts();
-  }, [selectedFilters, currentPage, category, searchTerm]);
+  }, [selectedFilters, currentPage, category, searchTerm, sortContent]);
 
   useEffect(() => {
-    setCurrentPage(1); // Reset to page 1 whenever the category changes
+    setSelectedFilters([]);
+    setCurrentPage(1);
   }, [category, searchTerm]);
 
-  const filters = [
-    { name: "men's shirts" },
-    { name: "pants" },
-    { name: "shorts" },
-    { name: "men's shoes" },
-  ];
+  console.log(location.pathname);
+
+  useEffect(() => {
+    if (location.pathname === "/products/category/men") {
+      setActiveFilters([
+        { type: "men's shirts", name: "Shirts" },
+        { type: "men's pants", name: "Pants" },
+        { type: "men's shorts", name: "Shorts" },
+        { type: "men's shoes", name: "Shoes" },
+      ]);
+    } else if (location.pathname === "/products/category/women") {
+      setActiveFilters([{ type: "women's shirts", name: "women's shirts" }]);
+    } else if (location.pathname === "/products/category/kids") {
+      setActiveFilters([
+        { type: "kid's shirts", name: "Shirts" },
+        { type: "kid's pants", name: "Pants" },
+      ]);
+    } else if (location.pathname === "/products/category/accessories") {
+      setActiveFilters([
+        { type: "caps", name: "Caps" },
+        { type: "arm sleeves", name: "Arm Sleeves" },
+        { type: "gloves", name: "Gloves" },
+        { type: "belts", name: "Belts" },
+      ]);
+    } else if (location.pathname === "/products/category/bags") {
+      setActiveFilters([
+        { type: "boston bags", name: "Boston Bags" },
+        { type: "pouches", name: "Pouches" },
+      ]);
+    } else {
+      setActiveFilters(filters);
+    }
+  }, [location.pathname]);
 
   const totalPages = Math.ceil(productTotal / productsPerPage);
 
@@ -84,6 +132,14 @@ export const Products = () => {
       setCurrentPage(page);
     }
   };
+
+  const handleSort = (sort) => {
+    setSortContent(sort);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedFilters, sortContent]);
 
   return (
     <div className="flex flex-col justify-center min-h-screen w-full">
@@ -106,19 +162,22 @@ export const Products = () => {
                 <MdFilterList className="w-4" />
                 <span className="text-sm mx-2">Filters</span>
               </button>
-              <Select>
+              <Select onValueChange={handleSort}>
                 <SelectTrigger className="w-[100px] capitalize">
                   <SelectValue placeholder="Sort by:" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem className="text-sm" value="light">
-                    Price
+                  <SelectItem className="text-sm" value="alphabet-asc">
+                    Alphabetical (A-Z)
                   </SelectItem>
-                  <SelectItem className="text-sm" value="dark">
-                    Latest
+                  <SelectItem className="text-sm" value="alphabet-desc">
+                    Alphabetical (Z-A)
                   </SelectItem>
-                  <SelectItem className="text-sm" value="system">
-                    Category
+                  <SelectItem className="text-sm" value="price-asc">
+                    Price (Low-High)
+                  </SelectItem>
+                  <SelectItem className="text-sm" value="price-desc">
+                    Price (High-Low)
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -127,7 +186,7 @@ export const Products = () => {
 
           {isFilterOpen && (
             <FilterBox
-              filters={filters}
+              filters={activeFilters}
               selectedFilters={selectedFilters}
               setSelectedFilters={setSelectedFilters}
             />
@@ -152,7 +211,7 @@ export const Products = () => {
               <div className="flex flex-wrap justify-start w-full my-5 gap-5 min-h-[700px]">
                 {products.map((product) => (
                   <ProductCard
-                    key={product.id}
+                    id={product.id}
                     label={product.name}
                     category={product.category}
                     price={product.price}

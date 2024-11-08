@@ -1,0 +1,15 @@
+export const filters = [
+  { type: "men's shirts", name: "men's shirts" },
+  { type: "men's pants", name: "men's pants" },
+  { type: "men's shorts", name: "men's shorts" },
+  { type: "men's shoes", name: "men's shoes" },
+  { type: "women's shirts", name: "women's shirts" },
+  { type: "kid's shirts", name: "kid's shirts" },
+  { type: "kid's pants", name: "kid's pants" },
+  { type: "boston bags", name: "boston bags" },
+  { type: "pouches", name: "pouches" },
+  { type: "caps", name: "caps" },
+  { type: "arm sleeves", name: "arm sleeves" },
+  { type: "gloves", name: "gloves" },
+  { type: "belts", name: "belts" },
+];

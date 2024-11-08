@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-export const ProductCard = ({ label, category, price, colors, image, link }) => {
+export const ProductCard = ({ id, label, category, price, colors, image, link }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <Link
@@ -34,10 +34,13 @@ export const ProductCard = ({ label, category, price, colors, image, link }) => 
           }
         })}
       </div>
-      <div className="flex flex-wrap flex-col">
-        <p className="text-zinc-400 uppercase font-light text-sm">{category}</p>
-        <h3 className="text-lg">{label}</h3>
-        <p className="text-lg font-semibold">PHP {price}</p>
+      <div className="flex flex-wrap flex-col gap-1">
+        <div className="flex justify-between">
+          <p className="text-zinc-400 uppercase font-light text-sm">{category}</p>
+          <p className="text-zinc-400 uppercase font-light text-sm">{id}</p>
+        </div>
+        <h3 className="font-medium text-sm">{label}</h3>
+        <p className="font-semibold">PHP {price}</p>
       </div>
     </Link>
   );

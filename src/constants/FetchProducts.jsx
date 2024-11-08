@@ -4,7 +4,8 @@ const FetchProducts = async () => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    const data = await response.json();
+    let data = await response.json();
+    data = data.sort(() => Math.random() - 0.5);
     return data;
   } catch (error) {
     console.error("Fetch error:", error);

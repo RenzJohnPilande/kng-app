@@ -54,7 +54,7 @@ export const ProductSection = () => {
       <div className="flex flex-wrap justify-center grid grid-cols-2 lg:grid-cols-4 gap-6 p-4">
         {products.map((product) => (
           <ProductCard
-            key={product.id}
+            id={product.id}
             label={product.name}
             category={product.category}
             price={product.price}
