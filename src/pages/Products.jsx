@@ -35,7 +35,7 @@ export const Products = () => {
 
   const getProducts = async () => {
     const result = await FetchProducts();
-    let filteredProducts = result;
+    let filteredProducts = result.sort(() => Math.random() - 0.5);
 
     if (category) {
       filteredProducts = filteredProducts.filter((product) => product.category === category);
@@ -142,7 +142,7 @@ export const Products = () => {
   }, [selectedFilters, sortContent]);
 
   return (
-    <div className="flex flex-col justify-center min-h-screen w-full">
+    <div className="flex flex-col justify-start min-h-screen w-full">
       <AlertBar />
       <Navigation />
       <div className="flex flex-col justify-center items-center w-full grow">

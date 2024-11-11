@@ -23,7 +23,8 @@ export const ProductSection = () => {
         } else {
           fetchedProducts = result.filter((product) => product.subcategory === "bags");
         }
-        const filteredProducts = fetchedProducts.slice(0, 8);
+        const sortedProducts = fetchedProducts.sort(() => Math.random() - 0.5);
+        const filteredProducts = sortedProducts.slice(0, 8);
         setProducts(filteredProducts);
       } else {
         setError("Error fetching products");
