@@ -39,7 +39,7 @@ export const ProductCard = ({ id, label, category, price, colors, image, link })
           <p className="text-zinc-400 uppercase font-light text-sm">{category}</p>
           <p className="text-zinc-400 uppercase font-light text-sm">{id}</p>
         </div>
-        <h3 className="font-medium text-sm">{label}</h3>
+        <h3 className="font-medium text-sm line-clamp-1">{label}</h3>
         <p className="font-semibold">PHP {price}</p>
       </div>
     </Link>

@@ -61,7 +61,7 @@ export const ProductSection = () => {
             price={product.price}
             colors={product.hexcode}
             image={`/images/products/${product.images[0]}`}
-            link={`/products/${product.id}`}
+            link={`/products/${product.category}/${product.id}`}
           />
         ))}
       </div>

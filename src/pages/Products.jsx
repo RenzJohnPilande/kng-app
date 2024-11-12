@@ -35,7 +35,7 @@ export const Products = () => {
 
   const getProducts = async () => {
     const result = await FetchProducts();
-    let filteredProducts = result.sort(() => Math.random() - 0.5);
+    let filteredProducts = result;
 
     if (category) {
       filteredProducts = filteredProducts.filter((product) => product.category === category);
@@ -208,7 +208,7 @@ export const Products = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-start w-full my-5 gap-5 min-h-[700px]">
+              <div className="flex flex-wrap grid grid-cols-2 md:grid-cols-4 justify-start w-full my-5 gap-5 min-h-[700px]">
                 {products.map((product) => (
                   <ProductCard
                     id={product.id}
@@ -217,7 +217,7 @@ export const Products = () => {
                     price={product.price}
                     colors={product.hexcode}
                     image={`/images/products/${product.images[0]}`}
-                    link={`/products/${product.id}`}
+                    link={`/products/${product.category}/${product.id}`}
                   />
                 ))}
               </div>

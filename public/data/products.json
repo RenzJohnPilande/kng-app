@@ -715,7 +715,7 @@
     "status": "Trends",
     "images": ["EU21-Black.png", "EU21-White.png", "EU21-Green.png", "EU21-Brown.png"],
     "sizes": ["NA"],
-    "material": ["POLYURETHANE LEATHER"]
+    "material": ["Polyurethane Leather"]
   },
   {
     "id": "EU22",
@@ -730,7 +730,7 @@
     "status": "Listed",
     "images": ["EU22-Green.png", "EU22-Blue.png", "EU22-Brown.png", "EU22-Orange.png"],
     "sizes": ["NA"],
-    "material": ["POLYURETHANE LEATHER"]
+    "material": ["Polyurethane Leather"]
   },
   {
     "id": "EU23",
@@ -751,7 +751,7 @@
       "EU23-Black.png"
     ],
     "sizes": ["NA"],
-    "material": ["POLYURETHANE LEATHER"]
+    "material": ["Polyurethane Leather"]
   },
   {
     "id": "EW17",
