@@ -71,12 +71,24 @@ export const Navigation = () => {
                 <Input type="text" placeholder="search" className=" rounded" />
               </div>
               <div className="flex flex-col my-5 font-semibold p-2 flex-grow">
-                <Link className="my-1">All</Link>
-                <Link className="my-1">Men</Link>
-                <Link className="my-1">Women</Link>
-                <Link className="my-1">Kids</Link>
-                <Link className="my-1">Accessories</Link>
-                <Link className="my-1">Bag</Link>
+                <Link to={"/products"} className="my-1">
+                  All
+                </Link>
+                <Link to={"/products/category/men"} className="my-1">
+                  Men
+                </Link>
+                <Link to={"/products/category/women"} className="my-1">
+                  Women
+                </Link>
+                <Link to={"/products/category/kids"} className="my-1">
+                  Kids
+                </Link>
+                <Link to={"/products/category/accessories"} className="my-1">
+                  Accessories
+                </Link>
+                <Link to={"/products/category/bags"} className="my-1">
+                  Bag
+                </Link>
               </div>
               <div className="flex justify-center border-t pt-2">
                 <Link className="text-sm">Terms and Conditions</Link>

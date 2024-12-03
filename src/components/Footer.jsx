@@ -7,34 +7,34 @@ export const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-10 container gap-4">
         <div className="flex flex-wrap flex-col">
           <h1 className="text-xl font-semibold my-2 uppercase">Categories</h1>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/products/category/men" className="text-sm my-1">
             Men
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/products/category/women" className="text-sm my-1">
             Women
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/products/category/kids" className="text-sm my-1">
             Kids
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/products/category/accessories" className="text-sm my-1">
             Accessories
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/products/category/bags" className="text-sm my-1">
             Bags
           </Link>
         </div>
         <div className="flex flex-wrap flex-col">
           <h1 className="text-xl font-semibold my-2 uppercase">Company Info</h1>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/about" className="text-sm my-1">
             About Us
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/contact" className="text-sm my-1">
             Contact Us
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/faqs" className="text-sm my-1">
             Faqs
           </Link>
-          <Link to="/" className="text-sm my-1">
+          <Link to="/terms" className="text-sm my-1">
             Terms and Conditions
           </Link>
         </div>
