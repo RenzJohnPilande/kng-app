@@ -18,6 +18,7 @@ import { useParams } from "react-router";
 import { CTAButton } from "@/components/CTAButton";
 import { Link, useLocation } from "react-router-dom";
 import { filters } from "@/constants/Filters";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -42,8 +43,10 @@ export const Products = () => {
     }
 
     if (searchTerm) {
-      filteredProducts = filteredProducts.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      filteredProducts = filteredProducts.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.id.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -141,12 +144,29 @@ export const Products = () => {
     setCurrentPage(1);
   }, [selectedFilters, sortContent]);
 
+  const crumbs = [
+    { link: "/", label: "home" },
+    { link: "/products", label: "products" },
+  ];
+
+  if (category) {
+    crumbs.push({
+      link: `/products/category/${category}`,
+      label: category.charAt(0).toUpperCase() + category.slice(1),
+    });
+  }
+
+  if (searchTerm) {
+    crumbs.push({ link: `/products/search/${searchTerm}`, label: `Search: ${searchTerm}` });
+  }
+
   return (
     <div className="flex flex-col justify-start min-h-screen w-full">
       <AlertBar />
       <Navigation />
-      <div className="flex flex-col justify-center items-center w-full grow">
+      <div className="flex flex-wrap flex-col justify-center items-center w-full grow">
         <div className="flex flex-wrap justify-center w-full max-w-[1300px] p-5">
+          <Breadcrumbs crumbs={crumbs} />
           <div className="flex items-center justify-end md:justify-between w-full p-1">
             <h1 className="hidden md:flex text-base font-semibold uppercase">
               Results <span className="flex items-center text-sm mx-1">({productTotal})</span>

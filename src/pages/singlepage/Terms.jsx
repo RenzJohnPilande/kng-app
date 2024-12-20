@@ -1,13 +1,20 @@
 import { AlertBar } from "@/components/AlertBar";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 
 export const Terms = () => {
+  const crumbs = [
+    { link: "/", label: "home" },
+    { link: "/terms", label: "terms and conditions" },
+  ];
+
   return (
     <div className="flex flex-col items-start justify-center min-h-screen w-full">
       <AlertBar />
       <Navigation />
-      <div class="flex flex-col items-center w-full py-5">
+      <div class="flex flex-wrap grow w-full min-h-[800px] justify-center items-center py-10">
+        <Breadcrumbs crumbs={crumbs} />
         <div class="max-w-4xl w-full bg-white p-6">
           <div class="flex justify-center w-full py-5 mb-6">
             <h1 class="text-xl font-bold text-center uppercase">Terms and Conditions</h1>

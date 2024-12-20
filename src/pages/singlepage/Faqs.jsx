@@ -1,4 +1,5 @@
 import { AlertBar } from "@/components/AlertBar";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 import {
@@ -49,11 +50,18 @@ export const Faqs = () => {
       description: "Yes, we do offer discounts and promotions. Terms and conditions apply.",
     },
   ];
+
+  const crumbs = [
+    { link: "/", label: "home" },
+    { link: "/faqs", label: "faqs" },
+  ];
+
   return (
     <div className="flex flex-col items-start justify-center min-h-screen w-full">
       <AlertBar />
       <Navigation />
-      <div className="flex flex-col items-center w-full py-5">
+      <div className="flex flex-wrap grow w-full min-h-[800px] justify-center items-center py-10">
+        <Breadcrumbs crumbs={crumbs} />
         <div className="max-w-4xl w-full bg-white p-6">
           <div className="flex justify-center w-full py-5 mb-6">
             <h1 className="text-xl font-bold text-center uppercase">Frequently Asked Questions</h1>

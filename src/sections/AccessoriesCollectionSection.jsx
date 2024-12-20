@@ -1,27 +1,83 @@
+import { CollectionCard } from "@/components/CollectionCard";
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { CTAButton } from "@/components/CTAButton";
+
 export const AccessoriesCollectionSection = () => {
+  const [activeCard, setActiveCard] = useState(1);
+
+  useEffect(() => {
+    AOS.init({ once: true });
+  }, []);
+
+  const handleClick = (index) => {
+    console.log("you clicked index " + index);
+    setActiveCard(index);
+
+    setTimeout(() => {
+      AOS.refresh();
+    }, 100);
+  };
+
+  const collectionContent = [
+    {
+      id: 1,
+      title: "Caps",
+      image: "/images/landingpage/caps.png",
+      description:
+        "A stylish cap that keeps the sun out of your eyes while adding a touch of flair to your game.",
+    },
+    {
+      id: 2,
+      title: "Arm Sleeves",
+      image: "/images/landingpage/arm-sleeves.png",
+      description:
+        "Arm sleeves that provide support and comfort to enhance your performance on the course.",
+    },
+    {
+      id: 3,
+      title: "Belts",
+      image: "/images/landingpage/belts.png",
+      description:
+        "Durable and adjustable belts that offer comfort and style for your golfing outfit.",
+    },
+    {
+      id: 4,
+      title: "Gloves",
+      image: "/images/landingpage/gloves.png",
+      description:
+        "Performance-focused golf gloves that provide a secure grip and comfort throughout your game.",
+    },
+  ];
+
   return (
-    <div className="flex flex-wrap justify-center content-center min-h-screen p-6">
-      <div className="flex justify-center text-center items-center flex-col flex-wrap w-full p-2">
-        <h1 className="text-3xl font-bold capitalize my-1">Style and Comfort for Your Game</h1>
+    <div className="flex flex-wrap justify-center content-center min-h-screen md:min-h-full px-6 py-20">
+      <div className="flex justify-center items-center text-center flex-col flex-wrap w-full p-2">
+        <h1 className="text-3xl font-bold capitalize my-1">Essentials for Your Game & Style</h1>
         <p className="max-w-[500px] my-1">
-          Discover our fashionable accessories designed to improve your game while keeping you
-          comfortable on and off the course.
+          Browse a selection of golf accessories that combine style and performance, keeping you
+          comfortable and ready for every game.
         </p>
       </div>
       <div className="flex flex-wrap justify-center container p-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[1200px]">
-          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
-            <span className="text-2xl uppercase font-semibold">Caps</span>
-          </div>
-          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
-            <span className="text-2xl uppercase font-semibold">Gloves</span>
-          </div>
-          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
-            <span className="text-2xl uppercase font-semibold">Belts</span>
-          </div>
-          <div className="flex flex-wrap justify-center items-center p-5 border w-full bg-black text-white rounded m-2 min-h-[200px]">
-            <span className="text-2xl uppercase font-semibold">Arm Sleeves</span>
-          </div>
+        {collectionContent.map((item) => (
+          <CollectionCard
+            key={item.id}
+            index={item.id}
+            isActive={activeCard === item.id}
+            onClick={() => handleClick(item.id)}
+            title={item.title}
+            image={item.image}
+            description={item.description}
+          />
+        ))}
+        <div className="flex flex-wrap items-center justify-center w-full pt-4">
+          <CTAButton
+            label={"See more"}
+            style="bg-zinc-950 text-white"
+            link="/products/category/accessories"
+          />
         </div>
       </div>
     </div>

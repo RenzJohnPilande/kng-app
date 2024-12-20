@@ -4,7 +4,7 @@ import { Navigation } from "../components/Navigation";
 import { ProductSection } from "@/sections/ProductSection";
 import { ApparelCollectionSection } from "@/sections/ApparelCollectionSection";
 import { AccessoriesCollectionSection } from "@/sections/AccessoriesCollectionSection";
-import { BagCollectionSection } from "@/sections/BagCollectionSection";
+import { CollectionSection } from "@/sections/CollectionSection";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ export const Index = () => {
   useEffect(() => {
     AOS.init();
   }, []);
+
   return (
     <>
       <AlertBar />
@@ -22,7 +23,7 @@ export const Index = () => {
       <ProductSection />
       <ApparelCollectionSection />
       <AccessoriesCollectionSection />
-      <BagCollectionSection />
+      <CollectionSection />
       <Footer />
     </>
   );

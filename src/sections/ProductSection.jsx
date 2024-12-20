@@ -34,7 +34,7 @@ export const ProductSection = () => {
   }, [activeButton]);
 
   return (
-    <div className="flex flex-wrap justify-center content-center bg-black min-h-screen p-3 text-balance bg-white">
+    <div className="flex flex-wrap justify-center content-center bg-black min-h-screen md:min-h-full px-6 py-20 text-balance bg-white">
       <div className="flex flex-wrap justify-center w-full p-4">
         <NavigationButton
           label="Apparel"

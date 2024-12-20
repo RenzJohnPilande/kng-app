@@ -6,12 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const Contact = () => {
   const form = useRef();
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
-  const [showErrorToast, setShowErrorToast] = useState(false);
 
+  const { toast } = useToast();
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -23,17 +25,21 @@ export const Contact = () => {
         () => {
           console.log("SUCCESS!");
           form.current.reset();
-          setShowSuccessToast(true);
-          setTimeout(() => {
-            setShowSuccessToast(false);
-          }, 3000);
+          toast({
+            variant: "success",
+            title: "Message Sent Successfully!",
+            description:
+              "Thank you for reaching out! We have received your message and will get back to you as soon as possible.",
+          });
         },
         (error) => {
           console.log("FAILED...", error.text);
-          setShowErrorToast(true);
-          setTimeout(() => {
-            setShowErrorToast(false);
-          }, 3000);
+          toast({
+            variant: "destructive",
+            title: "Something Went Wrong",
+            description:
+              "Oops! We couldn't send your message. Please try again later or contact us at inquiries@keepgoinggolf.com.",
+          });
         }
       );
   };
@@ -42,15 +48,21 @@ export const Contact = () => {
     AOS.init();
   }, []);
 
+  const crumbs = [
+    { link: "/", label: "home" },
+    { link: "/contact", label: "contact us" },
+  ];
+
   return (
     <div className="flex flex-col items-start justify-center min-h-screen w-full">
       <AlertBar />
       <Navigation />
-      <div className="flex grow w-full justify-center p-5">
-        <div className="border border-zinc-200 rounded container grid grid-cols-1 md:grid-cols-2 w-full bg-gray-100 shadow">
+      <div className="flex flex-wrap grow w-full content-center justify-center items-center py-10">
+        <Breadcrumbs crumbs={crumbs} />
+        <div className="border border-zinc-200 rounded container grid grid-cols-1 md:grid-cols-2 w-full bg-gray-100 shadow h-full items-center content-center">
           <div className="flex flex-wrap flex-col gap-4 py-14 px-10">
-            <div className="flex flex-wrap gap-2 ">
-              <h1 className="text-3xl font-semibold uppercase">Contact Us</h1>
+            <div className="flex flex-wrap gap-2">
+              <h1 className="text-xl font-bold text-center uppercase">Contact Us</h1>
               <p className="text-base leading-relaxed">
                 Thank you for visiting our website! If you have any questions or inquiries, feel
                 free to reach out to us using the contact information below.
@@ -82,7 +94,7 @@ export const Contact = () => {
             </div>
           </div>
           <div className="flex flex-wrap flex-col gap-4 bg-white py-14 px-10">
-            <p className="text-3xl font-semibold capitalize">send us a message!</p>
+            <p className="text-xl font-bold uppercase">send us a message!</p>
             <form ref={form} onSubmit={sendEmail} className="space-y-4">
               <div>
                 <label htmlFor="formName" className="block text-lg font-semibold">
@@ -133,6 +145,7 @@ export const Contact = () => {
           </div>
         </div>
       </div>
+      <Toaster />
 
       <Footer />
     </div>
