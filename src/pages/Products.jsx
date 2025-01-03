@@ -88,8 +88,8 @@ export const Products = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    getProducts();
     setTimeout(() => {
-      getProducts();
       setIsLoading(false);
     }, 1000);
   }, [selectedFilters, currentPage, category, searchTerm, sortContent]);
