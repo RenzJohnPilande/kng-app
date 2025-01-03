@@ -12,7 +12,7 @@ import { Footer } from "@/components/Footer";
 
 export const Index = () => {
   useEffect(() => {
-    AOS.init();
+    AOS.init({ once: true });
   }, []);
 
   return (

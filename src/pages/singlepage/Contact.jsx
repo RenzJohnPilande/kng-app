@@ -45,7 +45,7 @@ export const Contact = () => {
   };
 
   useEffect(() => {
-    AOS.init();
+    AOS.init({ once: true });
   }, []);
 
   const crumbs = [
