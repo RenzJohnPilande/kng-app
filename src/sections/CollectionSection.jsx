@@ -51,7 +51,7 @@ export const CollectionSection = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center content-center min-h-screen md:min-h-full px-6 py-20 bg-zinc-100">
+    <div className="flex flex-wrap justify-center content-center min-h-screen md:min-h-full px-6 py-20 bg-zinc-50">
       <div className="flex justify-center items-center text-center flex-col flex-wrap w-full p-2">
         <h1 className="text-3xl font-bold capitalize my-1">Functional & Stylish Golf Bags</h1>
         <p className="max-w-[500px] my-1">
@@ -74,11 +74,11 @@ export const CollectionSection = () => {
                     <div className="flex justify-center p-2">
                       <img src={item.image} alt={item.title} className="w-full max-w-[400px]" />
                     </div>
-                    <div className="flex flex-wrap content-center w-full text-center md:text-start gap-2 p-2 text-white">
+                    <div className="flex flex-wrap content-center w-full text-center md:text-start gap-5 p-2 text-white">
                       <p className="text-center text-4xl md:text-5xl font-semibold uppercase w-full md:text-start">
                         {item.title}
                       </p>
-                      <p className="text-center text-sm md:text-xl w-full md:text-justify">
+                      <p className="text-center text-sm md:text-base w-full md:text-justify">
                         {item.description}
                       </p>
                     </div>
